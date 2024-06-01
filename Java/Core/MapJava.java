@@ -1,12 +1,13 @@
-package CORE;
+package Core;
+
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
-
-import javax.security.auth.callback.ChoiceCallback;
 
 import java.util.Hashtable;
 // import java.util.HashTable;
@@ -23,7 +24,7 @@ import java.util.Hashtable;
 public class MapJava {
 
     public static void main(String[] args) {
-        
+
         Map<String, Integer> students = new Hashtable<String, Integer>();
         students.put("Ritesh", 49);
         students.put("Milan", 39);
@@ -34,7 +35,7 @@ public class MapJava {
         students.putIfAbsent("Rupesh", 90);
         students.putIfAbsent("Rupesh", 100);
 
-        System.out.println("The value of Ritesh is : "+ students.get("Ritesh"));
+        System.out.println("The value of Ritesh is : " + students.get("Ritesh"));
         System.out.println("The set of entrySet is : " + students.entrySet());
         System.out.println("The set of keySet is : " + students.keySet());
         System.out.println("The list of values is : " + students.values());
@@ -42,13 +43,14 @@ public class MapJava {
         System.out.println(students.putIfAbsent("Rupesh", 100));
 
         System.out.println("The Names and Mark of all the students are : ");
-        for (String allName : students.keySet()) {
-            System.out.println(allName + ": " + students.get(allName));
+        for (String key : students.keySet()) {
+            System.out.println(key + ": " + students.get(key));
         }
-        
-        /* Printing using Itterator Interface
-         * Step  01 : Convert Map to Set
-        */
+
+        /*
+         * Printing using Itterator Interface
+         * Step 01 : Convert Map to Set
+         */
 
         Set set = students.entrySet();
         System.out.println("All the elements in a set is : " + set);
@@ -70,10 +72,13 @@ public class MapJava {
 
         // Looping via enhanced for loop
         System.out.println("Looping throught Map elements directly using enhanced for loop : ");
-        for (Map.Entry m : students.entrySet()) {
-            System.out.println(m.getKey()  + " : " + m.getValue());
+        for (Map.Entry m : person.entrySet()) {
+            System.out.println(m.getKey() + " : " + m.getValue());
         }
 
+        System.out.println("Hm using Array.asList" + Arrays.asList(person));
+        System.out.println("Hm using Collections.singeltonList" + Collections.singletonList(person));
+
     }
-    
+
 }
