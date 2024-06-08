@@ -6,28 +6,20 @@ import java.util.HashMap;
 
 /*
  1. Implement 2SUM for unsorted and sorted array
- */
+*/
 
 public class TwoSum {
 
     public static void main(String[] args) {
 
-        // int arr[] = { 11, 3, 7, 9, 14, 2 };
-        int arr[] = { 3, 2, 4 };
-        int target = 6;
+        int arr[] = { 11, 3, 7, 9, 14, 2 };
+        // int arr[] = { 3, 2, 4 };
+        int target = 10;
 
-        // int ans[] = twoSumBf(arr, target);
-        // for (int i : ans) {
-        // System.out.print(i + " ");
-        // }
-
-        // System.out.println(twoSumOpt(arr, target));
-        // System.out.println(twoSumTwoPointer(arr, target));
-
-        int ans1[] = toSumHashMap(arr, target);
-        for (int i : ans1) {
-            System.out.print(i + " ");
-        }
+        System.out.println("Two Sum Brute Force  : " + Arrays.toString(twoSumBf(arr, target)));
+        System.out.println("Two Sum HM           : " + twoSumHM(arr, target));
+        System.out.println("Two Sum HashMap      : " + Arrays.toString(toSumHashMap(arr, target)));
+        System.out.println("Two Sum TwoPointer   : " + twoSumTwoPointer(arr, target) + " makes " + target);
 
     }
 
@@ -53,31 +45,33 @@ public class TwoSum {
     // than the indices will be the indices of arr[i] and ans.
     // Data Structure Used : HashMap
 
-    public static ArrayList<Integer> twoSumOpt(int arr[], int target) {
+    public static ArrayList<Integer> twoSumHM(int arr[], int target) {
 
         ArrayList<Integer> res = new ArrayList<Integer>();
-        HashMap<Integer, Integer> hs = new HashMap<>();
+        HashMap<Integer, Integer> hm = new HashMap<>();
 
         for (int i = 0; i < arr.length; i++) {
-            hs.put(arr[i], i);
+            hm.put(arr[i], i);
         }
 
         // System.out.println(Arrays.asList(hs));
         // System.out.println(Collections.singletonList(hs));
 
-        {
-            for (int i = 0; i < arr.length; i++) {
-                if (hs.containsKey(target - arr[i])) {
-                    res.add(i);
-                    res.add(hs.get(target - arr[i]));
-                    break;
-                }
-            }
+        for (int i = 0; i < arr.length; i++) {
 
-            return res;
+            int complement = target - arr[i];
+            if (hm.containsKey(complement) && hm.get(complement) != i) {
+                res.add(i);
+                res.add(hm.get(target - arr[i]));
+                break;
+            }
         }
+
+        return res;
     }
 
+    // using two pointer to return the values that makes the target and not the
+    // indices.
     public static ArrayList<Integer> twoSumTwoPointer(int arr[], int target) {
 
         ArrayList<Integer> res = new ArrayList<>();
@@ -90,8 +84,8 @@ public class TwoSum {
         while (start <= end) {
 
             if (arr[start] + arr[end] == target) {
-                res.add(start);
-                res.add(end);
+                res.add(arr[start]);
+                res.add(arr[end]);
                 break;
             } else if (arr[start] + arr[end] > target) {
                 end--;
@@ -115,7 +109,8 @@ public class TwoSum {
 
         for (int i = 0; i < arr.length; i++) {
 
-            if (hm.containsKey(target - arr[i])) {
+            int complement = target - arr[i];
+            if (hm.containsKey(complement) && hm.get(complement) != i) {
                 ans[0] = i;
                 ans[1] = hm.get(target - arr[i]);
                 break;

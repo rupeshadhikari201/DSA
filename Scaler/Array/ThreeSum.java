@@ -22,7 +22,7 @@ public class ThreeSum {
     public static ArrayList<ArrayList<Integer>> ThreSumBf(int arr[], int target) {
 
         ArrayList<ArrayList<Integer>> res = new ArrayList<>();
-        HashSet<HashSet<Integer>> st = new HashSet<>();
+        HashSet<HashSet<Integer>> hs = new HashSet<>();
 
         int len = arr.length;
 
@@ -30,22 +30,23 @@ public class ThreeSum {
             for (int j = i + 1; j < len; j++) {
                 for (int k = j + 1; k < len; k++) {
                     if (arr[i] + arr[j] + arr[k] == target
-                            && !st.contains(new HashSet<>(Arrays.asList(arr[i], arr[j], arr[k])))) {
+                            && !hs.contains(new HashSet<>(Arrays.asList(arr[i], arr[j], arr[k])))) {
 
-                        ArrayList<Integer> temp = new ArrayList<>();
-                        HashSet<Integer> s = new HashSet<>();
+                        ArrayList<Integer> arrtemp = new ArrayList<>();
+                        HashSet<Integer> hstemp = new HashSet<>();
 
-                        temp.add(arr[i]);
-                        temp.add(arr[j]);
-                        temp.add(arr[k]);
+                        // add to the ArrayList as one of the ans
+                        arrtemp.add(arr[i]);
+                        arrtemp.add(arr[j]);
+                        arrtemp.add(arr[k]);
 
                         // add to the HashSet to maintain unique triplets
-                        s.add(arr[i]);
-                        s.add(arr[j]);
-                        s.add(arr[k]);
+                        hstemp.add(arr[i]);
+                        hstemp.add(arr[j]);
+                        hstemp.add(arr[k]);
 
-                        st.add(s);
-                        res.add(temp);
+                        hs.add(hstemp);
+                        res.add(arrtemp);
                     }
                 }
             }
@@ -75,10 +76,10 @@ public class ThreeSum {
                 hm.put(arr[j], hm.get(arr[j]) - 1);
 
                 HashSet<Integer> hstemp = new HashSet<>(Arrays.asList(arr[i], arr[j], target - arr[i] - arr[j]));
+
                 if (hm.containsKey(target - arr[i] - arr[j]) && !hs.contains(hstemp)
                         && hm.get(target - arr[i] - arr[j]) > 0) {
 
-                    // if () {
                     ArrayList<Integer> temp = new ArrayList<>();
                     temp.add(arr[i]);
                     temp.add(arr[j]);
@@ -86,7 +87,7 @@ public class ThreeSum {
 
                     res.add(temp);
                     hs.add(hstemp);
-                    // }
+
                 }
 
                 // add back the count
